@@ -55,6 +55,7 @@ class _PokedexWidgetState extends State<PokedexWidget> {
           centerTitle: false,
           elevation: 2.0,
         ),
+        body: HomePageWidget();
       ),
     );
   }

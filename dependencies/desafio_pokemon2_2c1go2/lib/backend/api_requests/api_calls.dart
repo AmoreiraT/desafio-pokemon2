@@ -1,5 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import '../schema/structs/index.dart';
+import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
+    as desafio_pokemon2_2c1go2_data_schema;
+
 import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -9,23 +13,34 @@ export 'package:ff_commons/api_requests/api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-class PokeCall {
-  static Future<ApiCallResponse> call() async {
+class GetAllPokesCall {
+  static Future<ApiCallResponse> call({
+    int? limit = 0,
+    String? offset = '0',
+  }) async {
     return ApiManager.instance.makeApiCall(
-      callName: 'poke',
-      apiUrl:
-          'https://pokeapi.co/api/v2/pokemon?limit=\$_limit&offset=\$_offset',
+      callName: 'getAllPokes',
+      apiUrl: 'https://pokeapi.co/api/v2/pokemon?',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'limit': limit,
+        'offset': offset,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
-      decodeUtf8: true,
-      cache: true,
-      isStreamingApi: true,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
+
+  static List? pokes(dynamic response) => getJsonField(
+        response,
+        r'''$.results''',
+        true,
+      ) as List?;
 }
 
 String _toEncodable(dynamic item) {

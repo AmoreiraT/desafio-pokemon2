@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,6 +55,22 @@ class _PokedexWidgetState extends State<PokedexWidget> {
           actions: [],
           centerTitle: false,
           elevation: 2.0,
+        ),
+        body: SafeArea(
+          top: true,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  desafio_pokemon2_2c1go2_custom_widgets.ListOfPokes(),
+                ],
+              ),
+              desafio_pokemon2_2c1go2_custom_widgets.Homepagewidget(),
+              desafio_pokemon2_2c1go2_custom_widgets.Pokemonservice(),
+            ],
+          ),
         ),
       ),
     );

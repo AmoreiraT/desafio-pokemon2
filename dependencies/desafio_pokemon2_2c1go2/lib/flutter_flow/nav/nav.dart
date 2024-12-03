@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
+
 import '/index.dart';
 import '/main.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
@@ -12,6 +14,8 @@ import '/flutter_flow/lat_lng.dart';
 import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'serialization_util.dart';
+import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
+    as desafio_pokemon2_2c1go2_data_schema;
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -123,6 +127,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -140,6 +145,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }

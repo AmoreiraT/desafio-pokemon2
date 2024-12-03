@@ -1,4 +1,7 @@
 // Automatic FlutterFlow imports
+import '/backend/schema/structs/index.dart';
+import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
+    as desafio_pokemon2_2c1go2_data_schema;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets

@@ -1,0 +1,15 @@
+{
+	"projectName": "desafio-pokemon2",
+	"description": "FlutterFlow project for a Pokedex application.",
+	"version": "1.0.0",
+	"dependencies": {
+		"flutter": ">=2.0.0",
+		"flutter_flow": ">=1.0.0"
+	},
+	"customWidgets": [
+		{
+			"name": "CustomPokemonWidget",
+			"path": "lib/custom_code/widgets/custom_pokemon_widget.dart"
+		}
+	]
+}

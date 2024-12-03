@@ -1,17 +1,13 @@
 // Automatic FlutterFlow imports
-import '/backend/schema/structs/index.dart';
-import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
-    as desafio_pokemon2_2c1go2_data_schema;
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '/custom_code/actions/index.dart'; // Imports custom actions
-import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_table_2/data_table_2.dart';
-import 'pokemonservice.dart'; // Imports other custom widgets
+import 'package:desafio_pokemon2_2c1go2/backend/api_requests/api_calls.dart';
+import 'package:flutter/material.dart';
+
+import '../actions/get_all_pokemon.dart';
 
 class CustomPokemonWidget extends StatefulWidget {
   const CustomPokemonWidget({
@@ -47,9 +43,10 @@ class _CustomPokemonWidgetState extends State<CustomPokemonWidget> {
     });
 
     try {
-      final pokemons = await getPokemons(limit: _limit, offset: _offset);
+      final pokemons =
+          await GetAllPokesCall.call(limit: _limit, offset: _offset.toString());
       setState(() {
-        _pokemons.addAll(pokemons);
+        _pokemons.addAll(pokemons.response as Iterable<Pokemon>);
         _offset += _limit;
         _isLoading = false;
       });

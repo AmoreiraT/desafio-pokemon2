@@ -35,7 +35,7 @@ dependencies:
   data_table_2:
   desafio_pokemon2_2c1go2:
     path: ./dependencies/desafio_pokemon2_2c1go2 # current
-  equatable: 2.0.5
+  equatable: ^2.0.5
   ff_commons:
     path: ./dependencies/ff_commons # 1.0.0+1
   ff_theme:
@@ -81,14 +81,15 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
+  carousel_slider: ^5.0.0
 
 dependency_overrides:
   http: 1.2.2
   uuid: ^4.0.0
 
 dev_dependencies:
-  flutter_lints: 4.0.0
-  lints: 4.0.0
+  flutter_lints: ^5.0.0
+  lints: ^5.0.0
   flutter_test:
     sdk: flutter
 

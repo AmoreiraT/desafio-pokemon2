@@ -1,16 +1,14 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import '/backend/schema/util/schema_util.dart';
-
-import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'index.dart';
 
 class PokedexStruct extends BaseStruct {
   PokedexStruct({
     int? count,
     String? next,
     String? previous,
-    List<desafio_pokemon2_2c1go2_data_schema.ResultsStruct>? results,
+    List<ResultsStruct>? results,
   })  : _count = count,
         _next = next,
         _previous = previous,
@@ -40,15 +38,11 @@ class PokedexStruct extends BaseStruct {
   bool hasPrevious() => _previous != null;
 
   // "results" field.
-  List<desafio_pokemon2_2c1go2_data_schema.ResultsStruct>? _results;
-  List<desafio_pokemon2_2c1go2_data_schema.ResultsStruct> get results =>
-      _results ?? const [];
-  set results(List<desafio_pokemon2_2c1go2_data_schema.ResultsStruct>? val) =>
-      _results = val;
+  List<ResultsStruct>? _results;
+  List<ResultsStruct> get results => _results ?? const [];
+  set results(List<ResultsStruct>? val) => _results = val;
 
-  void updateResults(
-      Function(List<desafio_pokemon2_2c1go2_data_schema.ResultsStruct>)
-          updateFn) {
+  void updateResults(Function(List<ResultsStruct>) updateFn) {
     updateFn(_results ??= []);
   }
 
@@ -60,7 +54,7 @@ class PokedexStruct extends BaseStruct {
         previous: data['previous'] as String?,
         results: getStructList(
           data['results'],
-          desafio_pokemon2_2c1go2_data_schema.ResultsStruct.fromMap,
+          ResultsStruct.fromMap,
         ),
       );
 
@@ -112,13 +106,11 @@ class PokedexStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        results: deserializeStructParam<
-            desafio_pokemon2_2c1go2_data_schema.ResultsStruct>(
+        results: deserializeStructParam<ResultsStruct>(
           data['results'],
           ParamType.DataStruct,
           true,
-          structBuilder: desafio_pokemon2_2c1go2_data_schema
-              .ResultsStruct.fromSerializableMap,
+          structBuilder: ResultsStruct.fromSerializableMap,
         ),
       );
 

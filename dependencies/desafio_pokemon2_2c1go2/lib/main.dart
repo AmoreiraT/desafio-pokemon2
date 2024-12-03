@@ -15,7 +15,6 @@ import 'index.dart';
 
 import 'package:desafio_pokemon2_2c1go2/app_state.dart'
     as desafio_pokemon2_2c1go2_app_state;
-import 'package:null/custom_code/actions/index.dart' as null_actions;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

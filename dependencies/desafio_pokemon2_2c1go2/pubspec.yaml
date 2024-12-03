@@ -1,4 +1,4 @@
-name: my_desafio_pokemon2_2c1go2
+name: desafio_pokemon2_2c1go2
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -33,8 +33,8 @@ dependencies:
   cached_network_image_web: 1.3.1
   collection: 1.18.0
   data_table_2:
-  desafio_pokemon2_2c1go2:
-    path: ../desafio_pokemon2_2c1go2 # current
+
+
   equatable: 2.0.5
   ff_commons:
     path: ../ff_commons # 1.0.0+1

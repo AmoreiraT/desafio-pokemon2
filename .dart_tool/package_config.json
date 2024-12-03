@@ -74,6 +74,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "data_table_2",
+      "rootUri": "file:///Users/amoreirath/.pub-cache/hosted/pub.dev/data_table_2-2.5.16",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "equatable",
       "rootUri": "file:///Users/amoreirath/.pub-cache/hosted/pub.dev/equatable-2.0.5",
       "packageUri": "lib/",
@@ -596,10 +602,10 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-12-03T01:24:58.531052Z",
+  "generated": "2024-12-03T01:37:30.264084Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/amoreirath/development/flutter",
-  "flutterVersion": "3.24.6-0.0.pre.1",
+  "flutterVersion": "3.24.5",
   "pubCache": "file:///Users/amoreirath/.pub-cache"
 }

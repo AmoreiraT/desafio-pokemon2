@@ -125,44 +125,43 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('FourSys Pokédex'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              setState(() {
-                _pokemons.clear();
-                _currentPage = 1;
-              });
-              _loadPokemons();
-            },
-          ),
-        ],
-      ),
       body: _isLoading && _pokemons.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(
+                  16, 40, 16, 16), // Added top padding
               child: Column(
                 children: [
-                  // Logo
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Image.network(
-                      'https://www.foursys.com.br/images/logo-foursys.png',
-                      color: const Color(0xFFEE1515),
-                      height: 50,
-                      fit: BoxFit.contain,
-                    ),
+                  // Logo and Reload button row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.network(
+                        'https://www.foursys.com.br/images/logo-foursys.png',
+                        color: const Color(0xFFEE1515),
+                        height: 40,
+                        fit: BoxFit.contain,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.refresh),
+                        onPressed: () {
+                          setState(() {
+                            _pokemons.clear();
+                            _currentPage = 1;
+                          });
+                          _loadPokemons();
+                        },
+                      ),
+                    ],
                   ),
 
-                  // Carousel
+                  // Update Carousel height and spacing
                   if (_pokemons.isNotEmpty) ...[
                     CarouselSlider.builder(
                       itemCount: _pokemons.length,
                       options: CarouselOptions(
-                        height: 120,
+                        height: 200, // Reduced height
+                        viewportFraction: 0.4, // Show more items
                         enlargeCenterPage: true,
                         autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 3),
@@ -245,14 +244,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         );
                       },
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4), // Reduced spacing
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: _pokemons.asMap().entries.map((entry) {
                         return Container(
-                          width: 8,
-                          height: 8,
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          width: 6, // Smaller dots
+                          height: 6,
+                          margin: const EdgeInsets.symmetric(horizontal: 3),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _currentCarouselIndex == entry.key
@@ -262,7 +261,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         );
                       }).toList(),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8), // Reduced spacing
                   ],
 
                   // Existing filter Card and DataTable2...
@@ -374,7 +373,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               Text(
                                 '#${pokemon.id.toString().padLeft(3, '0')}',
                                 style: const TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
@@ -404,7 +403,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               Text(
                                 pokemon.name.toUpperCase(),
                                 style: const TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 0.5,
                                 ),

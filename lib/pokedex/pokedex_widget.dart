@@ -1,6 +1,7 @@
+import '/components/home_c_omponent_widget.dart';
+import '/components/list_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -58,17 +59,41 @@ class _PokedexWidgetState extends State<PokedexWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
+          child: Stack(
             children: [
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  custom_widgets.ListOfPokes(),
+                  Container(
+                    width: 638.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: wrapWithModel(
+                        model: _model.listModel,
+                        updateCallback: () => safeSetState(() {}),
+                        updateOnChange: true,
+                        child: ListWidget(),
+                      ),
+                    ),
+                  ),
+                  wrapWithModel(
+                    model: _model.homeCOmponentModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: HomeCOmponentWidget(),
+                  ),
                 ],
               ),
-              desafio_pokemon2_2c1go2_custom_widgets.Homepagewidget(),
-              desafio_pokemon2_2c1go2_custom_widgets.Pokemonservice(),
+              Container(
+                width: 399.0,
+                height: 743.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+              ),
             ],
           ),
         ),

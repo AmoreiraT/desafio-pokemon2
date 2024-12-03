@@ -1,3 +1,5 @@
+import '/custom_code/actions/index.dart' as actions;
+import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -11,14 +13,39 @@ import 'package:desafio_pokemon2_2c1go2/flutter_flow/internationalization.dart'
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 
+import 'package:desafio_pokemon2_2c1go2/app_state.dart'
+    as desafio_pokemon2_2c1go2_app_state;
+import 'package:null/custom_code/actions/index.dart' as null_actions;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 
+  // Start initial custom actions code
+  await actions.getAllPokemon();
+  // End initial custom actions code
+
   await FlutterFlowTheme.initialize();
 
-  runApp(MyApp());
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
+
+  final desafio_pokemon2_2c1go2AppState =
+      desafio_pokemon2_2c1go2_app_state.FFAppState();
+  await desafio_pokemon2_2c1go2AppState.initializePersistedState();
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => appState,
+      ),
+      ChangeNotifierProvider(
+        create: (context) => desafio_pokemon2_2c1go2AppState,
+      ),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {

@@ -1,12 +1,11 @@
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
+import 'package:flutter/material.dart';
+
 import '/components/home_c_omponent_widget.dart';
 import '/components/list_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'pokedex_model.dart';
+
 export 'pokedex_model.dart';
 
 class PokedexWidget extends StatefulWidget {
@@ -53,7 +52,7 @@ class _PokedexWidgetState extends State<PokedexWidget> {
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -71,19 +70,19 @@ class _PokedexWidgetState extends State<PokedexWidget> {
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                     child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: wrapWithModel(
                         model: _model.listModel,
                         updateCallback: () => safeSetState(() {}),
                         updateOnChange: true,
-                        child: ListWidget(),
+                        child: const ListWidget(),
                       ),
                     ),
                   ),
                   wrapWithModel(
                     model: _model.homeCOmponentModel,
                     updateCallback: () => safeSetState(() {}),
-                    child: HomeCOmponentWidget(),
+                    child: const HomeCOmponentWidget(),
                   ),
                 ],
               ),

@@ -1,15 +1,10 @@
-import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:convert';
-import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
-    as desafio_pokemon2_2c1go2_data_schema;
-import '/backend/schema/structs/index.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+
+import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'home_c_omponent_model.dart';
+
 export 'home_c_omponent_model.dart';
 
 class HomeCOmponentWidget extends StatefulWidget {
@@ -37,9 +32,7 @@ class _HomeCOmponentWidgetState extends State<HomeCOmponentWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResult1f9 = await GetAllPokesCall.call();
 
-      if (desafio_pokemon2_2c1go2_data_schema.ResultsStruct.maybeFromMap(
-              (_model.apiResult1f9?.jsonBody ?? ''))!
-          .toMap()) {
+      if ((_model.apiResult1f9?.jsonBody ?? '').isNotEmpty) {
         await _model.callPokes(context);
         return;
       } else {

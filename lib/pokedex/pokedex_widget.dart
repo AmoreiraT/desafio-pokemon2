@@ -1,12 +1,14 @@
-import '/components/home_c_omponent_widget.dart';
-import '/components/list_widget.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
+import 'dart:async';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+
+import '/flutter_flow/flutter_flow_util.dart';
+import '../custom_code/widgets/pokemonservice.dart';
 import 'pokedex_model.dart';
+
 export 'pokedex_model.dart';
 
 class PokedexWidget extends StatefulWidget {
@@ -20,84 +22,175 @@ class _PokedexWidgetState extends State<PokedexWidget> {
   late PokedexModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final List<Pokemon> _pokemons = [];
+  bool _isLoading = false;
+  int _offset = 0;
+  final int _limit = 151;
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => PokedexModel());
+    _loadPokemons();
   }
 
-  @override
-  void dispose() {
-    _model.dispose();
+  FutureOr<void> _loadPokemons() async {
+    if (_isLoading) return;
 
-    super.dispose();
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final response = await http.get(
+        Uri.parse(
+            'https://pokeapi.co/api/v2/pokemon?limit=$_limit&offset=$_offset'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
+        for (var pokemon in data['results']) {
+          final detailResponse = await http.get(Uri.parse(pokemon['url']));
+          if (detailResponse.statusCode == 200) {
+            final pokemonData = jsonDecode(detailResponse.body);
+            setState(() {
+              _pokemons.add(Pokemon.fromJson(pokemonData));
+            });
+          }
+        }
+
+        setState(() {
+          _offset += _limit;
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error loading Pokémon: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Page Title',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Inter Tight',
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('FourSys Pokédex'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              setState(() {
+                _pokemons.clear();
+                _offset = 0;
+              });
+              _loadPokemons();
+            },
           ),
-          actions: [],
-          centerTitle: false,
-          elevation: 2.0,
-        ),
-        body: SafeArea(
-          top: true,
-          child: Stack(
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: 638.0,
-                    height: 100.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: wrapWithModel(
-                        model: _model.listModel,
-                        updateCallback: () => safeSetState(() {}),
-                        updateOnChange: true,
-                        child: ListWidget(),
-                      ),
-                    ),
+        ],
+      ),
+      body: _isLoading && _pokemons.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
+              padding: const EdgeInsets.all(16),
+              child: DataTable2(
+                columns: const [
+                  DataColumn2(
+                    label: Text('ID'),
+                    size: ColumnSize.S,
                   ),
-                  wrapWithModel(
-                    model: _model.homeCOmponentModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: HomeCOmponentWidget(),
+                  DataColumn2(
+                    label: Text('Imagem'),
+                    size: ColumnSize.S,
+                  ),
+                  DataColumn2(
+                    label: Text('Nome'),
+                    size: ColumnSize.M,
+                  ),
+                  DataColumn2(
+                    label: Text('Elementos'),
+                    size: ColumnSize.L,
                   ),
                 ],
+                rows: _pokemons.map((pokemon) {
+                  return DataRow2(
+                    cells: [
+                      DataCell(
+                          Text('#${pokemon.id.toString().padLeft(3, '0')}')),
+                      DataCell(
+                        CachedNetworkImage(
+                          imageUrl: pokemon.imageUrl,
+                          height: 50,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                      ),
+                      DataCell(Text(pokemon.name.toUpperCase())),
+                      DataCell(
+                        Wrap(
+                          spacing: 8,
+                          children: pokemon.types.map((type) {
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: _getTypeColor(type),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                type.toUpperCase(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  );
+                }).toList(),
               ),
-              Container(
-                width: 399.0,
-                height: 743.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
+  }
+
+  Color _getTypeColor(String type) {
+    final colors = {
+      'normal': const Color(0xFFA8A878),
+      'fire': const Color(0xFFF08030),
+      'water': const Color(0xFF6890F0),
+      'electric': const Color(0xFFF8D030),
+      'grass': const Color(0xFF78C850),
+      'ice': const Color(0xFF98D8D8),
+      'fighting': const Color(0xFFC03028),
+      'poison': const Color(0xFFA040A0),
+      'ground': const Color(0xFFE0C068),
+      'flying': const Color(0xFFA890F0),
+      'psychic': const Color(0xFFF85888),
+      'bug': const Color(0xFFA8B820),
+      'rock': const Color(0xFFB8A038),
+      'ghost': const Color(0xFF705898),
+      'dragon': const Color(0xFF7038F8),
+      'dark': const Color(0xFF705848),
+      'steel': const Color(0xFFB8B8D0),
+      'fairy': const Color(0xFFEE99AC),
+    };
+    return colors[type.toLowerCase()] ?? Colors.grey;
   }
 }

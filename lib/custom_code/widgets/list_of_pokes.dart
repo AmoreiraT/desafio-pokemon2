@@ -1,13 +1,5 @@
 // Automatic FlutterFlow imports
-import '/backend/schema/structs/index.dart';
-import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
-    as desafio_pokemon2_2c1go2_data_schema;
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '/custom_code/actions/index.dart'; // Imports custom actions
-import '/flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
@@ -15,11 +7,12 @@ import 'package:flutter/material.dart';
 // boilerplate code using the green button on the right!
 
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/material.dart';
 
 import 'pokemonservice.dart'; // Imports other custom widgets
 
-class CustomPokemonWidget extends StatefulWidget {
-  const CustomPokemonWidget({
+class ListOfPokes extends StatefulWidget {
+  const ListOfPokes({
     super.key,
     this.width,
     this.height,
@@ -29,10 +22,10 @@ class CustomPokemonWidget extends StatefulWidget {
   final double? height;
 
   @override
-  _CustomPokemonWidgetState createState() => _CustomPokemonWidgetState();
+  _ListOfPokesState createState() => _ListOfPokesState();
 }
 
-class _CustomPokemonWidgetState extends State<CustomPokemonWidget> {
+class _ListOfPokesState extends State<ListOfPokes> {
   final List<Pokemon> _pokemons = [];
   bool _isLoading = false;
   int _offset = 0;

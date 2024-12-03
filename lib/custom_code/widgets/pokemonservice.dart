@@ -1,19 +1,42 @@
 // Automatic FlutterFlow imports
-import '/backend/schema/structs/index.dart';
-import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
-    as desafio_pokemon2_2c1go2_data_schema;
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '/custom_code/actions/index.dart'; // Imports custom actions
-import '/flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 // pokemon_service.dart
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+class Pokemonservice {
+  final int id;
+  final String name;
+  final String imageUrl;
+  final double height;
+  final double weight;
+  final List<String> types;
+
+  Pokemonservice({
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+    required this.height,
+    required this.weight,
+    required this.types,
+  });
+
+  factory Pokemonservice.fromJson(Map<String, dynamic> json) {
+    return Pokemonservice(
+      id: json['id'],
+      name: json['name'],
+      imageUrl: json['sprites']['other']['official-artwork']['front_default'] ??
+          json['sprites']['front_default'],
+      height: json['height'] / 10,
+      weight: json['weight'] / 10,
+      types:
+          List<String>.from(json['types'].map((type) => type['type']['name'])),
+    );
+  }
+}
 
 class Pokemon {
   final int id;

@@ -1,1 +1,0 @@
- /Users/amoreirath/dev/flutter/tste_poke/desafio-pokemon2/.dart_tool/flutter_build/48cc55b9ddf4d8aa22239e7276d90e34/native_assets.yaml: 

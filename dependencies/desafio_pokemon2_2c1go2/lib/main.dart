@@ -1,15 +1,21 @@
-import 'package:desafio_pokemon2_2c1go2/app_state.dart'
-    as desafio_pokemon2_2c1go2_app_state;
-import 'package:desafio_pokemon2_2c1go2/flutter_flow/internationalization.dart'
-    as desafio_pokemon2_2c1go2_internationalization;
+import '/custom_code/actions/index.dart' as actions;
+import 'package:provider/provider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:provider/provider.dart';
-
-import '/custom_code/actions/index.dart' as actions;
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
+import 'package:desafio_pokemon2_2c1go2/flutter_flow/internationalization.dart'
+    as desafio_pokemon2_2c1go2_internationalization;
+import 'flutter_flow/nav/nav.dart';
+import 'index.dart';
+
+import 'package:desafio_pokemon2_2c1go2/app_state.dart'
+    as desafio_pokemon2_2c1go2_app_state;
+import 'package:null/custom_code/actions/index.dart' as null_actions;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,9 +29,13 @@ void main() async {
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
 
-  final desafioPokemon22c1go2appstate =
+  final desafio_pokemon2_2c1go2AppState =
       desafio_pokemon2_2c1go2_app_state.FFAppState();
-  await desafioPokemon22c1go2appstate.initializePersistedState();
+  await desafio_pokemon2_2c1go2AppState.initializePersistedState();
+
+  // Start final custom actions code
+  await actions.getAllPokemon();
+  // End final custom actions code
 
   runApp(MultiProvider(
     providers: [
@@ -33,16 +43,14 @@ void main() async {
         create: (context) => appState,
       ),
       ChangeNotifierProvider(
-        create: (context) => desafioPokemon22c1go2appstate,
+        create: (context) => desafio_pokemon2_2c1go2AppState,
       ),
     ],
-    child: const MyApp(),
+    child: MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   State<MyApp> createState() => _MyAppState();
@@ -79,7 +87,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'desafio-pokemon2',
-      localizationsDelegates: const [
+      localizationsDelegates: [
         FFLocalizationsDelegate(),
         desafio_pokemon2_2c1go2_internationalization.FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,

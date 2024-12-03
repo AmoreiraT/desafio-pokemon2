@@ -51,11 +51,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HomePage',
           path: '/homePage',
           builder: (context, params) => HomePageWidget(),
-        ),
-        FFRoute(
-          name: 'pokedex',
-          path: '/pokedex',
-          builder: (context, params) => PokedexWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

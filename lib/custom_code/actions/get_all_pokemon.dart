@@ -1,10 +1,16 @@
 // Automatic FlutterFlow imports
-import 'dart:convert';
-
+import '/backend/schema/structs/index.dart';
+import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
+    as desafio_pokemon2_2c1go2_data_schema;
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'index.dart'; // Imports other custom actions
+import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:http/http.dart' as http;
+import 'dart:convert';
+// Begin custom function code
 
 Future getAllPokemon() async {
   // to get all pokemon and fill state

@@ -1,15 +1,14 @@
 // Automatic FlutterFlow imports
-import 'package:cached_network_image/cached_network_image.dart';
+import '/backend/schema/structs/index.dart';
+import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
+    as desafio_pokemon2_2c1go2_data_schema;
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'index.dart'; // Imports other custom widgets
+import '/custom_code/actions/index.dart'; // Imports custom actions
+import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
-
-// Set your widget name, define your parameter, and then add the
-// boilerplate code using the green button on the right!
-
-import 'package:data_table_2/data_table_2.dart';
-import 'package:flutter/material.dart';
-
-import 'pokemonservice.dart'; // Imports other custom widgets
 
 class ListOfPokes extends StatefulWidget {
   const ListOfPokes({
@@ -66,23 +65,10 @@ class _ListOfPokesState extends State<ListOfPokes> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pokédex'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              setState(() {
-                _pokemons.clear();
-                _offset = 0;
-              });
-              _loadPokemons();
-            },
-          ),
-        ],
-      ),
-      body: _isLoading && _pokemons.isEmpty
+    return SizedBox(
+      width: widget.width,
+      height: widget.height,
+      child: _isLoading && _pokemons.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(16),

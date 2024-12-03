@@ -1,9 +1,10 @@
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
-
-import '/flutter_flow/flutter_flow_util.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'home_page_model.dart';
-
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
@@ -38,6 +39,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: true,
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
       ),
     );
   }

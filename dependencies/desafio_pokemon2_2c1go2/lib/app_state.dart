@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
+import '/backend/schema/structs/index.dart';
 import "package:desafio_pokemon2_2c1go2/backend/schema/structs/index.dart"
     as desafio_pokemon2_2c1go2_data_schema;
-import 'package:flutter/material.dart';
-
+import '/backend/api_requests/api_calls.dart';
+import 'package:ff_commons/api_requests/api_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {

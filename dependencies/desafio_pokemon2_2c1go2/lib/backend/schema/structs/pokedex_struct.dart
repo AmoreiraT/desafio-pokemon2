@@ -1,10 +1,9 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import 'package:desafio_pokemon2_2c1go2/backend/schema/structs/results_struct.dart'
-    as desafio_pokemon2_2c1go2_data_schema;
+import '/backend/schema/util/schema_util.dart';
 
-import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
 class PokedexStruct extends BaseStruct {
   PokedexStruct({

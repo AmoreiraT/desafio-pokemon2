@@ -6,20 +6,12 @@ import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
-import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Set your widget name, define your parameter, and then add the
-// boilerplate code using the green button on the right!
-
-import 'package:data_table_2/data_table_2.dart';
-
-import 'pokemonservice.dart'; // Imports other custom widgets
-
-class CustomPokemonWidget extends StatefulWidget {
-  const CustomPokemonWidget({
+class ListOfPokes extends StatefulWidget {
+  const ListOfPokes({
     super.key,
     this.width,
     this.height,
@@ -29,10 +21,10 @@ class CustomPokemonWidget extends StatefulWidget {
   final double? height;
 
   @override
-  _CustomPokemonWidgetState createState() => _CustomPokemonWidgetState();
+  _ListOfPokesState createState() => _ListOfPokesState();
 }
 
-class _CustomPokemonWidgetState extends State<CustomPokemonWidget> {
+class _ListOfPokesState extends State<ListOfPokes> {
   final List<Pokemon> _pokemons = [];
   bool _isLoading = false;
   int _offset = 0;
@@ -73,23 +65,10 @@ class _CustomPokemonWidgetState extends State<CustomPokemonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pokédex'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              setState(() {
-                _pokemons.clear();
-                _offset = 0;
-              });
-              _loadPokemons();
-            },
-          ),
-        ],
-      ),
-      body: _isLoading && _pokemons.isEmpty
+    return SizedBox(
+      width: widget.width,
+      height: widget.height,
+      child: _isLoading && _pokemons.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(16),
